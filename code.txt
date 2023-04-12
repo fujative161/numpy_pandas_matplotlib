@@ -1,0 +1,39 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Загрузка данных из файла
+df = pd.read_csv("Students_Performance_1441e1ff9.csv")
+
+
+# вычисление статистических показателей с использованием numpy
+math_scores = df["math score"].values
+mean_math_score = np.mean(math_scores)
+median_math_score = np.median(math_scores)
+std_math_score = np.std(math_scores)
+var_math_score = np.var(math_scores)
+
+print("Средний балл по математике:", mean_math_score)
+print("Медианный балл по математике:", median_math_score)
+print("Стандартное отклонение баллов по математике:", std_math_score)
+print("Дисперсия баллов по математике:", var_math_score)
+
+# использование pandas для фильтрации данных
+# вывод информации о студентах с баллами выше 90 по математике
+high_math_scores = df[df["math score"] > 90]
+print("Студенты с баллами выше 90 по математике:")
+print(high_math_scores)
+
+# использование pandas для группировки данных
+# подсчет среднего балла по математике в зависимости от пола
+mean_math_score_by_gender = df.groupby("gender")["math score"].mean()
+print("Средний балл по математике в зависимости от пола:")
+print(mean_math_score_by_gender)
+
+# использование matplotlib для визуализации данных
+# построение гистограммы на основе столбца "math score"
+plt.hist(df["math score"], label="Тест по математике")
+plt.xlabel("Баллы за тест")
+plt.ylabel("Количество студентов")
+plt.legend()
+plt.show()
